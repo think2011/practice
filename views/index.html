@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>豆瓣搜索API</title>
+	<link rel="stylesheet" href="./layout/plugins/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" href="./layout/plugins/font-awesome/font-awesome.min.css" />
+	<link rel="stylesheet" href="./layout/common/common.css" />
+	<link rel="stylesheet" href="./layout/index.css" />
+</head>
+<body class="ng-cloak">
+	<div class="container" ng-controller="appCtrl">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i> 关键字</span>
+                    <input ng-keyup="search()" ng-model="key" type="text" class="form-control" placeholder="">
+                </div>
+            </div>
+            <div class="col-md-3">
+               <button ng-click="modeChange()" class="btn"><i class="fa fa-picture-o"></i> 显示图文</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="panel">
+                    <div class="panel-body">
+
+                        <div ng-if="mode == 'pic'" ng-repeat="item in items"  class="media">
+                            <a class="pull-left" href="{{ item.alt }}">
+                                <img src="{{ item.images.small }}" />
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ item.title }}</h4>
+                            </div>
+                        </div>
+
+                        <ul ng-if="mode == 'word'" class="list-group">
+                            <li ng-repeat="item in items" class="list-group-item">
+                                <a href="{{ item.alt }}">{{ item.title }}</a>
+                            </li>
+                        </ul>
+
+                        <p ng-show="!key" class="text-muted"><i class="fa fa-smile-o"></i> 请输入电影名称进行搜索</p>
+                        <p ng-show="key && !items.length" class="text-muted"><i class="fa fa-smile-o"></i> 没有找到电影</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- javascript
+		================================================== -->
+	<script src="./layout/plugins/sea.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		seajs.use('./layout/common/common',function(){
+			seajs.use('./layout/index.js');
+		});
+	</script>
+</body>
+</html>
