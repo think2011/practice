@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/chat.js"></script>
+</head>
+<body>
+	 <div id="chat">
+         <ui id="messages"></ui>
+         <form id="form">
+             <input type="text" id="input" />
+             <button>send</button>
+         </form>
+	 </div>
+
+     <script>
+         var socket = io.connect();
+         socket.on('connect', function () {
+             var name = prompt('你的名字是？');
+             socket.emit('join', name);
+             $('#messages').append('<li><span style="color: red">欢迎'+ name +'来到聊天！</li>');
+         })
+
+         var addMsg = function (name, msg) {
+             $('#messages').append('<li><span style="color: #ccc">'+ name +'：</span> '+ msg +'</li>');
+         }
+
+         socket.on('announcement', function(msg) {
+             $('#messages').append('<li><span style="color: red">'+ msg +'</li>');
+         })
+
+         socket.on('text', function(name, msg) {
+             addMsg(name, msg);
+         })
+
+         $('button').on('click', function () {
+             var $input = $('input');
+             socket.emit('text', $input.val());
+             addMsg('我', $input.val());
+             $input.val('').focus();
+
+             return false;
+         })
+
+     </script>
+</body>
+</html>
