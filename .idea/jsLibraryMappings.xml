@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+<<<<<<< HEAD
     <file url="PROJECT" libraries="{Node.js v0.10.22 Core Modules, angularjs-DefinitelyTyped, express-DefinitelyTyped}" />
+=======
+    <file url="PROJECT" libraries="{Node.js v0.10.22 Core Modules}" />
+>>>>>>> e734d0e2a27d9cc32227e132a4f2fa977704b2c0
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
