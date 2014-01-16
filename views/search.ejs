@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%= search %> 的搜索结果：</h1>
+    <% if (results.length) { %>
+    <ul>
+        <% for (var i = 0; i < results.length; i++) { %>
+        <li>写结果</li>
+        <% } %>
+    </ul>
+    <% } else { %>
+    <p>没有找到内容</p>
+    <% } %>
+</body>
+</html>
